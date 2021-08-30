@@ -45,7 +45,7 @@ class _MoedasPageState extends State<MoedasPage> {
             trailing: Text(real.format(tabela[moeda].preco)),
             selected: selecionadas.contains(tabela[moeda]),
             selectedTileColor: Colors.indigo[50],
-            onTap: () {
+            onLongPress: () {
               setState(() {
                 (selecionadas.contains(tabela[moeda]))
                     ? selecionadas.remove(tabela[moeda])
