@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cripto_coin/models/moedas.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class MoedasDetalhesPage extends StatefulWidget {
   Moeda moeda;
 
