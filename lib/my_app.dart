@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cripto_coin/pages/coins_page.dart';
+import 'package:flutter_cripto_coin/pages/moedas_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: CoinsPage(),
+      // ignore: prefer_const_constructors
+      home: MoedasPage(),
     );
   }
 }
