@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      // ignore: prefer_const_constructors
-      home: MoedasPage(),
+      home: const MoedasPage(),
     );
   }
 }
