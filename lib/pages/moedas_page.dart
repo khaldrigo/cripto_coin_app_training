@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cripto_coin/pages/moedas_detalhes_page.dart';
 
 import 'package:intl/intl.dart';
 
@@ -22,11 +23,9 @@ class _MoedasPageState extends State<MoedasPage> {
     var selecionas = selecionadas;
     if (selecionas.isEmpty) {
       return AppBar(
-        title: const Center(
-          child: (Text(
-            'Cripto Moedas',
-          )),
-        ),
+        title: (const Text(
+          'Cripto Moedas',
+        )),
       );
     } else {
       return AppBar(
@@ -40,9 +39,7 @@ class _MoedasPageState extends State<MoedasPage> {
             Icons.arrow_back,
           ),
         ),
-        title: Center(
-            widthFactor: 2.0,
-            child: Text('${selecionadas.length} selecionadas')),
+        title: Text('${selecionadas.length} selecionadas'),
         backgroundColor: Colors.blueGrey,
         elevation: 5,
         iconTheme: const IconThemeData(color: Colors.black87),
@@ -56,6 +53,15 @@ class _MoedasPageState extends State<MoedasPage> {
         ),
       );
     }
+  }
+
+  mostrarDetalhes(Moeda moeda) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => MoedasDetalhesPage(moeda: moeda),
+      ),
+    );
   }
 
   @override
@@ -96,6 +102,7 @@ class _MoedasPageState extends State<MoedasPage> {
                       : selecionadas.add(tabela[moeda]);
                 });
               },
+              onTap: () => mostrarDetalhes(tabela[moeda]),
             );
           },
           padding: const EdgeInsets.all(16),
