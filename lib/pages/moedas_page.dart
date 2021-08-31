@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cripto_coin/configs/app_settings.dart';
 import 'package:flutter_cripto_coin/pages/moedas_detalhes_page.dart';
 import 'package:flutter_cripto_coin/repositories/favoritas_repository.dart';
 
@@ -18,17 +19,47 @@ class MoedasPage extends StatefulWidget {
 
 class _MoedasPageState extends State<MoedasPage> {
   final tabela = MoedaRepository.tabela;
-  NumberFormat real = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
+  late NumberFormat real;
+  late Map<String, String> loc;
   List<Moeda> selecionadas = [];
   late FavoritasRepository favoritas;
+
+  readNumberFormat() {
+    loc = context.watch<AppSettings>().locale;
+    real = NumberFormat.currency(locale: loc['locale'], name: loc['name']);
+  }
+
+  changeLanguageButton() {
+    final locale = loc['locale'] == 'pt_BR' ? 'en_US' : 'pt_BR';
+    final name = loc['locale'] == 'pt_BR' ? '\$' : 'R\$';
+
+    return PopupMenuButton(
+      icon: const Icon(Icons.language),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: ListTile(
+            leading: const Icon(Icons.swap_vert),
+            title: Text('Usar $locale'),
+            onTap: () {
+              context.read<AppSettings>().setLocale(locale, name);
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
 
   appBarDinamica() {
     var selecionas = selecionadas;
     if (selecionas.isEmpty) {
       return AppBar(
-        title: (const Text(
+        title: const Text(
           'Cripto Moedas',
-        )),
+        ),
+        actions: [
+          changeLanguageButton(),
+        ],
       );
     } else {
       return AppBar(
@@ -76,6 +107,7 @@ class _MoedasPageState extends State<MoedasPage> {
     // favoritas = Provider.of<FavoritasRepository>(context);
     // ambas as formas funcionam
     favoritas = context.watch<FavoritasRepository>();
+    readNumberFormat();
 
     return Scaffold(
         appBar: appBarDinamica(),
