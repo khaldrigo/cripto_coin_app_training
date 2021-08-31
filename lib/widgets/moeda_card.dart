@@ -5,6 +5,7 @@ import 'package:flutter_cripto_coin/repositories/favoritas_repository.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class MoedaCard extends StatefulWidget {
   Moeda moeda;
 
