@@ -27,7 +27,9 @@ Future<void> main() async {
           create: (context) => AppSettings(),
         ),
         ChangeNotifierProvider(
-          create: (context) => FavoritasRepository(),
+          create: (context) => FavoritasRepository(
+            auth: context.read<AuthService>(),
+          ),
         ),
       ],
       child: const MyApp(),
