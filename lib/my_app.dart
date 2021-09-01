@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cripto_coin/pages/home_page.dart';
+
+import 'package:flutter_cripto_coin/widgets/auth_check.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: const HomePage(),
+      home: const AuthCheck(),
     );
   }
 }
