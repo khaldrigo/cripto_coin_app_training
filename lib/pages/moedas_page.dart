@@ -18,11 +18,12 @@ class MoedasPage extends StatefulWidget {
 }
 
 class _MoedasPageState extends State<MoedasPage> {
-  final tabela = MoedaRepository.tabela;
+  late List<Moeda> tabela;
   late NumberFormat real;
   late Map<String, String> loc;
   List<Moeda> selecionadas = [];
   late FavoritasRepository favoritas;
+  late MoedaRepository moedas;
 
   readNumberFormat() {
     loc = context.watch<AppSettings>().locale;
@@ -107,6 +108,9 @@ class _MoedasPageState extends State<MoedasPage> {
     // favoritas = Provider.of<FavoritasRepository>(context);
     // ambas as formas funcionam
     favoritas = context.watch<FavoritasRepository>();
+    moedas = context.watch<MoedaRepository>();
+    tabela = moedas.tabela;
+
     readNumberFormat();
 
     return Scaffold(
@@ -122,7 +126,7 @@ class _MoedasPageState extends State<MoedasPage> {
                       child: Icon(Icons.check),
                     )
                   : SizedBox(
-                      child: Image.asset(tabela[moeda].icone),
+                      child: Image.network(tabela[moeda].icone),
                       width: 40,
                     ),
               title: Row(

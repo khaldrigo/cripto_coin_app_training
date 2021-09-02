@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cripto_coin/configs/app_settings.dart';
+import 'package:flutter_cripto_coin/models/moedas.dart';
 import 'package:flutter_cripto_coin/repositories/conta_repository.dart';
 import 'package:flutter_cripto_coin/repositories/favoritas_repository.dart';
+import 'package:flutter_cripto_coin/repositories/moeda_repository.dart';
 import 'package:flutter_cripto_coin/services/auth_services.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +23,12 @@ Future<void> main() async {
           create: (context) => AuthService(),
         ),
         ChangeNotifierProvider(
-          create: (context) => ContaRepository(),
+          create: (context) => MoedaRepository(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ContaRepository(
+            moedas: context.read<MoedaRepository>(),
+          ),
         ),
         ChangeNotifierProvider(
           create: (context) => AppSettings(),
@@ -29,6 +36,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => FavoritasRepository(
             auth: context.read<AuthService>(),
+            moedas: context.read<MoedaRepository>(),
           ),
         ),
       ],
